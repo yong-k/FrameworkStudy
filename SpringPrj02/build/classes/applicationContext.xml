@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- ※ 스프링이 제공하는 환경 설정 XML 파일 샘플 -->
+	<!--    → 스프링이 생성하고 관리해야 할 객체들에 대한 정보 전달 -->
+	<!-- 
+		내가 여기에 스프링 컨테이너가 운용하는데 필요할 목록 적어둘게
+		너가 운용해야 할, 운용하는 과정에서 필요한 설명서 
+		내가 여기에 다 기술해둘테니까 너가 필요하다고 판단하면 그거 쓰면 돼
+    -->
+
+	<!-- 
+		우리 xml에 다 bean 으로 등록해놨다.
+		springContainer 안에서는 bean Container 가 돌아간다.
+		bean 공장이 생겨서 bean을 생성해낸다.
+		enterprise 기반으로 생성한거라, 단일 bean에 집중해서 돌아가는게 아니라
+		여러 bean들을 찍어내고, 관리하는 게 비일비재하게 일어나기 때문에
+		bean 생성하는 factory들(→ bean factory)이 있는 
+		공단(→ applicationContext) 자체가 돌아가게 된다.
+		'bean 식별해줬으면 좋겠어'하고 id 설정해서 라벨링을 다 한 것이다.
+    -->  
+      
+    <!-- id는 이름 뭐라고 부를지 정해서 쓰고, 클래스는 우리가 만든거 쓰면 된다. -->
+    <!-- 
+	    필요하면 너가 알아서 인스턴스 생성해
+	    그리고 너가 필요한만큼 쓰고, 너가 알아서 소멸시키면 돼
+	    얼마만큼 살려둘지 라이프사이클 관리도 너가 해
+    -->
+    <!-- RecordImpl1 (Record) 클래스에 대한 객체 정보 전달 과정 -->
+    <bean id="record1" class="com.test.spr.RecordImpl1"></bean>
+    
+    <!-- RecordImpl2 (Record) 클래스에 대한 객체 정보 전달 과정 -->
+    <bean id="record2" class="com.test.spr.RecordImpl2"></bean>
+    
+   	<!-- RecordViewImpl (RecordView) 클래스에 대한 객체 정보 전달 과정 -->
+    <!-- 
+	    그런데, RecordViewImpl 은 Record 를 필요로 한다.
+	    RecordViewImpl 의 의존객체는 Record 이다.
+	    여기서 DI 설정도 해주게 된다고 했으므로, 의존객체에 대한 정보 전달
+	    property 태그 사용해서
+ 	-->
+    <bean id="view" class="com.test.spr.RecordViewImpl">
+    	<!-- RecordImpl1 또는 RecordImpl2 객체 (→ 의존 객체)에 대한 DI 설정 정보 전달 과정 -->
+    	<!-- 『property』 엘리먼트는 setter 메소드에 대한 정의 -->
+    	<!-- 즉, 『setXxx()』 메소드인 경우 『<property name="xxx"></property>』 -->
+    	<property name="record">
+    	<!-- RecordViewImpl의 setter 메소드에 Record record 라고 매개변수 받으니 --> 
+    	<!-- 그 이름 property name에 넣어준거!! -->
+    	
+    		<!-- 『ref』 엘리먼트에 의해 DI 객체에 대한 참조 지정 -->
+    		<!-- <ref bean="record1"/> -->
+    		<ref bean="record2"/>
+    	</property>
+    	
+    	<!-- ※ 위 구문은 (Line 39~45) -->
+    	<!-- 『<property name="record" ref="record1"></property>』 -->
+    	<!-- 형태로 작성해도 된다. -->
+    	<!-- → 참조는 별도로 등록안하고, 속성값으로 넘겨줘도 상관없다는 얘기이다. --> 	
+    </bean>
+    
+</beans>

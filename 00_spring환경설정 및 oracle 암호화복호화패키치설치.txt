@@ -1,0 +1,83 @@
+
+--○ 오라클 한글 깨질 때
+- 한글깨진다면 window>prefeneces>검색으로 content type 
+  >text 밑에 encoding 수정하신듯
+
+================================================================================
+
+--○ Spring 환경설정
+
+dynamic web project로 SpringPrj02 이름으로 web.xml 도 체크 후 생성
+> 프로젝트 우클릭 > build path > configure build path
+> Libraries > 여기에 spring 관련 jar 파일 등록할거임 
+> 우측에 Add External JARs 클릭 
+> 압축해제해 놓은곳(나는 D/강의장에는 C)으로 가서
+  폴더 2개 중에 스프링핵심 jar폴더인 『s-f-3.0.2-with-docs』로 들어가서
+> 『dist』폴더로 가기
+> 이름 org.springframework 까지는 똑같으니까 그 뒤에부터 보면 된다.
+  선택할 jar파일 ctrl키 눌러서 선택하기
+  asm, beans, context(support안붙어있는거), core, expression 총 5개 선택
+> 열기
+> 압축해제 해 놓은곳(나는 D/강의장에는 C)으로 가서
+  폴더 2개 중에 『s-f-3.0.2-dependencies』로 들어가서
+  『org.apache.commons』 폴더로 들어가기
+> 제일 끝에 logging 써있는 폴더 > 1.1.1 
+> logging으로 끝나는 jar선택 (source안붙어있는거)
+> apply > apply and close
+
+
+
+- xml 파일 생성
+Java Resources > src > new > other 
+> xml > xml file > name: applicationContext.xml
+
+
+
+-탐색기 열어서 『s-f-3.0.2-with-docs』 > docs 
+> spring-framework-reference
+> 안에 3개 파일 똑같은데 지원형식만 다른거 (html, htmlsingle, pdf)
+> htmlsingle > spring-framework-references.html 열기
+> 목록상에서 큰 아라비아 숫자 3번. Core Technologies 쪽으로 가서
+> 3.2.1. Configuration metadata 클릭
+> 아래 박스 긁어서 복사
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+  <bean id="..." class="...">
+    <!-- collaborators and configuration for this bean go here -->
+  </bean>
+
+  <bean id="..." class="...">
+    <!-- collaborators and configuration for this bean go here -->
+  </bean>
+
+  <!-- more bean definitions go here -->
+
+</beans>
+
+> 복사했으면 ctrl+a 해서 전체 덮어쓰기 해버리기
+
+
+================================================================================
+
+--○ oracle 암호화 복호화 관련 패키지 설치
+경로 : C:\oraclexe\app\oracle\product\11.2.0\server\rdbms\admin\dbmsobtk.sql
+	c드라이브 > oracleexe > app > oracle > product
+	>11.20.0 > server > rdbms > admin
+	에서 『dbmsobtk.sql』 찾기 (파일 있어야 실행가능한거라 있는지 먼저 확인)
+@C:\oraclexe\app\oracle\product\11.2.0\server\rdbms\admin\dbmsobtk.sql 실행
+
+같은 경로에서 『prvtobtk.plb』 찾기 (파일 있어야 실행가능한거라 있는지 먼저 확인)
+@C:\oraclexe\app\oracle\product\11.2.0\server\rdbms\admin\prvtobtk.plb 실행
+
+
+
+
+
+
+
+
+
